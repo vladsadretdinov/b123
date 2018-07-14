@@ -17,9 +17,10 @@ export class CreateComponent implements OnInit {
 
   constructor(private store: Store<AppState>,private cityService: CityWeather) { };
 
-  addCity(name,temp) {
+  addCity(name) {
     this.cityService.searchWeatherData(name).subscribe(
       data => {
+        localStorage.setItem(name, JSON.stringify({ 'temp': data['current']['temp_c'], icon: data['current']['condition']['icon'] }));
         this.store.dispatch(new CityActions.AddCity(
           {
             name:name,
@@ -30,7 +31,21 @@ export class CreateComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-  }
+  update(name) {
+    this.cityService.searchWeatherData(name).subscribe(
+data => {
+  localStorage.setItem(name, JSON.stringify({ 'temp': data['current']['temp_c'], icon: data['current']['condition']['icon'] }));
+  console.log(data['current']['temp_c']);
+     });
+ }
 
+  ngOnInit() {
+    setInterval(()=> {
+      let keys = Object.keys(localStorage),
+      i = keys.length;
+        while ( i-- ) {
+          this.update(localStorage.key( i ));
+        }
+      }, 4000);
+  }
 }

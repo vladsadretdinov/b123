@@ -4,6 +4,8 @@ import { Observable} from "rxjs/index";
 import { Store } from "@ngrx/store";
 import { City} from "../models/city.model";
 import { AppState} from "../app.state";
+import * as CityActions from "../actions/city.action";
+import { CityWeather } from "../services/cityWeather";
 
 @Component({
   selector: 'app-read',
