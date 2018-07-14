@@ -3,7 +3,7 @@
   <h3>Города</h3>
   <ul>
     <li *ngFor="let city of cities | async">
-      <span>{{ city.name }}</span> - <span>{{ city.temp }}</span>
+      <span>{{ city.name }}</span> - <span>{{ city.temp }} </span> - <img src="{{ city.icon }}">
     </li>
   </ul>
 

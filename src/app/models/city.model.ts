@@ -1,4 +1,5 @@
 export interface City {
   name: string,
-  temp: number
+  temp: number,
+  icon: string
 }
