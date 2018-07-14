@@ -1,3 +1,7 @@
-<p>
-  create works!
-</p>
+<div class="left">
+
+  <input type="text" placeholder="Название города" #name>
+  <input type="text" placeholder="Температура" #temp>
+
+  <button (click)="addCity(name.value,temp.value)">Добавить город</button>
+</div>
