@@ -36,6 +36,16 @@ export class CreateComponent implements OnInit {
 data => {
   localStorage.setItem(name, JSON.stringify({ 'temp': data['current']['temp_c'], icon: data['current']['condition']['icon'] }));
   console.log(data['current']['temp_c']);
+
+  this.store.dispatch(new CityActions.RemoveCity(0) );
+
+  this.store.dispatch(new CityActions.AddCity(
+    {
+      name:name,
+      temp: data['current']['temp_c'],
+      icon: data['current']['condition']['icon']
+    }));
+
      });
  }
 
@@ -46,6 +56,6 @@ data => {
         while ( i-- ) {
           this.update(localStorage.key( i ));
         }
-      }, 4000);
+      }, 15*1000); //15сек для наглядности
   }
 }

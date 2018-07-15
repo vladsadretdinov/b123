@@ -1,6 +1,8 @@
 import { Action } from "@ngrx/store";
 import { City} from "../models/city.model";
 import * as CityActions from './../actions/city.action';
+// import { Action } from "../actions/city.action";
+
 
 // const initialState: City = {
 //   name: 'Kazan',
@@ -23,7 +25,11 @@ export function reducer(state: City[] = initialState, action: CityActions.Action
   switch (action.type) {
     case CityActions.ADD_CITY:
       return [...state,action.payload];
+    // case CityActions.REMOVE_CITY:
+    //   state.splice(action.payload, 1);
+    //   return state;
     default:
+      state.splice(action.payload, 1);
       return state;
   }
 }
