@@ -14,10 +14,11 @@ import { CityWeather } from "../services/cityWeather";
 })
 export class ReadComponent implements OnInit {
 
-  cities: Observable<City[]>;
+  // cities: Observable<City[]>;
+  cities$: Observable<City[]>;
 
   constructor(private store: Store<AppState>) {
-    this.cities = store.select('city');
+    this.cities$ = store.select('city');
   }
 
   ngOnInit() {
