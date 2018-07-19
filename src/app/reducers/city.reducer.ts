@@ -1,15 +1,19 @@
 import { Action } from "@ngrx/store";
 import { City} from "../models/city.model";
 import * as CityActions from './../actions/city.action';
-// import { Action } from "../actions/city.action";
 
-
-// const initialState: City = {
-//   name: 'Kazan',
-//   temp: 23
-// };
-
-let initialState: City[] = [];
+let initialState: City[] = [
+  {
+    name: 'Kazan',
+    temp: 23,
+    icon: 'test'
+  },
+  {
+    name: 'Moscow',
+    temp: 24,
+    icon: 'test'
+  }
+];
 
 let keys = Object.keys(localStorage),
   i = keys.length;
@@ -25,11 +29,36 @@ export function reducer(state: City[] = initialState, action: CityActions.Action
   switch (action.type) {
     case CityActions.ADD_CITY:
       return [...state,action.payload];
-    // case CityActions.REMOVE_CITY:
-    //   state.splice(action.payload, 1);
-    //   return state;
+    case CityActions.UPDATE_CITY: {
+
+
+      const t =[];
+
+      const f = (previousValue, currentValue, currentIndex, t) => {
+        if(currentValue.name !== action.payload.name)
+          t.push(currentValue);
+        else
+          t.push({...action.payload, temp: action.payload.temp, icon: action.payload.icon});
+      };
+
+      const re = state.reduce(f,t);
+
+      console.log(re);
+
+      return state;
+      // return re;
+
+      // console.log('v');
+      // const c = state.find((t1,i) => (t1.name === action.payload) );
+      //
+      // const reducer = (accumulator, currentValue) => accumulator + currentValue;
+      //
+      //
+      // console.log(c);
+      //
+      // return state;
+    }
     default:
-      state.splice(action.payload, 1);
       return state;
   }
 }

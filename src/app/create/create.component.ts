@@ -20,15 +20,20 @@ export class CreateComponent implements OnInit {
   addCity(name) {
     this.cityService.searchWeatherData(name).subscribe(
       data => {
-        localStorage.setItem(name, JSON.stringify({ 'temp': data['current']['temp_c'], icon: data['current']['condition']['icon'] }));
-        this.store.dispatch(new CityActions.AddCity(
-          {
-            name:name,
-            temp: data['current']['temp_c'],
-            icon: data['current']['condition']['icon']
-          }));
+              this.store.dispatch(new CityActions.AddCity(
+                {
+                  name:name,
+                  temp: data['current']['temp_c'],
+                  icon: data['current']['condition']['icon']
+                }));
       }
     );
+  }
+
+  update1(name) {
+    this.store.dispatch(new CityActions.UpdateCity(name));
+
+
   }
 
   update(name) {
@@ -37,7 +42,7 @@ data => {
   localStorage.setItem(name, JSON.stringify({ 'temp': data['current']['temp_c'], icon: data['current']['condition']['icon'] }));
   console.log(data['current']['temp_c']);
 
-  this.store.dispatch(new CityActions.RemoveCity(0) );
+  // this.store.dispatch(new CityActions.RemoveCity(0) );
 
   this.store.dispatch(new CityActions.AddCity(
     {
