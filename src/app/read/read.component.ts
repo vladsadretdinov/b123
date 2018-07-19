@@ -19,7 +19,15 @@ export class ReadComponent implements OnInit {
   cities$: Observable<City[]>;
 
   constructor(private store: Store<AppState>) {
+
     // this.cities$ = store.select('city');
+
+    setInterval(()=> {
+      let cities =  JSON.parse(localStorage.getItem('cities'));
+      cities.forEach(function(item, i, cities) {
+        console.log(item);
+      });
+    }, 15*1000); //15сек для наглядности
 
     this.cities$ = store.select('city').pipe(tap(cities => localStorage.setItem('cities', JSON.stringify(cities))));
   }

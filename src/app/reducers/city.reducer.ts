@@ -2,28 +2,7 @@ import { Action } from "@ngrx/store";
 import { City} from "../models/city.model";
 import * as CityActions from './../actions/city.action';
 
-let initialState: City[] = [
-  {
-    name: 'Kazan',
-    temp: 23,
-    icon: 'test'
-  },
-  {
-    name: 'Moscow',
-    temp: 24,
-    icon: 'test'
-  }
-];
-
-let keys = Object.keys(localStorage),
-  i = keys.length;
-
-while ( i-- ) {
-  initialState.push( {
-    name:  localStorage.key( i ) ,
-    temp: JSON.parse(localStorage.getItem(keys[i]))['temp'] ,
-    icon: JSON.parse(localStorage.getItem(keys[i]))['icon'] })
-}
+let initialState: City[] = JSON.parse(localStorage.getItem('cities'));
 
 export function reducer(state: City[] = initialState, action: CityActions.Actions) {
   switch (action.type) {
