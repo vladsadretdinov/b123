@@ -1,6 +1,4 @@
-<div>
-
-  <input type="text" placeholder="Название города" #name>
-
-  <button (click)="addCity(name.value)">Добавить город</button>
+<div class="create">
+  <input [(ngModel)]="name" placeholder="Название города" class="create-input">
+  <button (click)="addCity(name)" class="create-btn">Добавить город</button>
 </div>

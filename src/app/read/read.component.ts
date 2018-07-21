@@ -19,7 +19,8 @@ export class ReadComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private cityService: CityWeather) {
 
-    this.updateCities(this.store, this.cityService);
+
+    // this.updateCities(this.store, this.cityService);
 
     this.cities$ = store.select('city').pipe(tap(cities => localStorage.setItem('cities', JSON.stringify(cities))));
 

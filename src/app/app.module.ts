@@ -10,6 +10,8 @@ import {CreateComponent} from './create/create.component';
 
 import {HttpClientModule} from "@angular/common/http";
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +20,7 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     StoreModule.forRoot({
       city: reducer
     }),

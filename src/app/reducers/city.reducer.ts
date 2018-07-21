@@ -1,7 +1,8 @@
 import {City} from "../models/city.model";
 import * as CityActions from './../actions/city.action';
 
-let initialState: City[] = JSON.parse(localStorage.getItem('cities')) === null ? [] : JSON.parse(localStorage.getItem('cities'));
+let localStorageData = JSON.parse(localStorage.getItem('cities'));
+let initialState: City[] = localStorageData === null ? [] : localStorageData;
 
 export function reducer(state: City[] = initialState, action: CityActions.Actions) {
   switch (action.type) {
