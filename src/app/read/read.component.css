@@ -1,3 +1,73 @@
 :host > div {
   padding: 30px;
 }
+
+.title {
+  margin: 0 0 20px 0;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+.cities {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.cities-item {
+  height: 250px;
+  min-width: 250px;
+  background: #5182fb;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.cities-item-name {
+  display: block;
+  padding: 15px;
+  max-width: calc(100% - 15px);
+  overflow: hidden;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  background: #3871fd;
+}
+
+.cities-item-img {
+  position: absolute;
+  top: calc(50% - 38px);
+  left: calc(50% - 38px);
+  border-radius: 50%;
+  border: 6px solid white;
+  background: white;
+}
+
+.cities-item-info {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  padding: 15px;
+  width: calc(100% - 30px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cities-item-tmp {
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.cities-item-text {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: right;
+}

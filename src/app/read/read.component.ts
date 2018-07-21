@@ -19,8 +19,7 @@ export class ReadComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private cityService: CityWeather) {
 
-
-    // this.updateCities(this.store, this.cityService);
+    this.updateCities(this.store, this.cityService);
 
     this.cities$ = store.select('city').pipe(tap(cities => localStorage.setItem('cities', JSON.stringify(cities))));
 
@@ -41,7 +40,7 @@ export class ReadComponent implements OnInit {
               name: data['location']['name'],
               temp: data['current']['temp_c'],
               icon: data['current']['condition']['icon'],
-              text: data['current']['text']
+              text: data['current']['condition']['text']
             };
 
             store.dispatch(new CityActions.UpdateCity(result));

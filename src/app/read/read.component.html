@@ -1,8 +1,12 @@
 <div *ngIf="cities$">
-  <h3>Список ваших городов</h3>
-  <ul>
-    <li *ngFor="let city of cities$ | async">
-      <span>{{ city.name }}</span> - <span>{{ city.temp }} </span> - <img src="{{ city.icon }}">
+  <ul class="cities">
+    <li class="cities-item" *ngFor="let city of cities$ | async">
+      <span class="cities-item-name">{{ city.name }}</span>
+      <div class="cities-item-info">
+        <span class="cities-item-tmp">{{ city.temp }}°</span>
+        <span class="cities-item-text">{{ city.text }}</span>
+      </div>
+      <img class="cities-item-img" src="{{ city.icon }}">
     </li>
   </ul>
 </div>

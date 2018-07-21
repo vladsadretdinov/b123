@@ -18,6 +18,9 @@ export class CreateComponent implements OnInit {
 
   addCity(name) {
 
+    if(!name)
+      return;
+
     let state = this.state.getValue().city;
 
     function isAlreadyExistsInState(state) {
@@ -41,7 +44,7 @@ export class CreateComponent implements OnInit {
           name: data['location']['name'],
           temp: data['current']['temp_c'],
           icon: data['current']['condition']['icon'],
-          text: data['current']['text'],
+          text: data['current']['condition']['text'],
           region: data['location']['region'],
           country: data['location']['country'],
           lat: data['location']['lat'],

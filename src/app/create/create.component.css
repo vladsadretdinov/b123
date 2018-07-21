@@ -1,3 +1,31 @@
-:host > div {
-  padding: 30px;
+.create {
+  min-height: 30px;
+  padding: 30px 30px 30px 40px;
+  display: flex;
+  align-items: center;
+  background: #5182fb;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, .1);
+}
+
+.create-input {
+  font-size: 20px;
+  padding: 10px;
+  width: calc(50% - 200px);
+  height: 20px;
+  border: none;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, .1);
+}
+
+.create-btn {
+  width: 200px;
+  margin-left: -200px;
+  height: 40px;
+  border: none;
+  background: #5182fb;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: -5px 0 5px 0 rgba(0, 0, 0, .1);
 }
