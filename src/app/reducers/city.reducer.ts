@@ -10,17 +10,15 @@ export function reducer(state: City[] = initialState, action: CityActions.Action
     }
     case CityActions.UPDATE_CITY: {
 
+      state.forEach(function (item, i, arr) {
+        if (item.name === action.payload.name) {
+          state[i].temp = action.payload.temp;
+          state[i].icon = action.payload.icon;
+          state[i].text = action.payload.text;
 
-      const t = [];
-
-      const f = (previousValue, currentValue, currentIndex, t) => {
-        if (currentValue.name !== action.payload.name)
-          t.push(currentValue);
-        else
-          t.push({...action.payload, temp: action.payload.temp, icon: action.payload.icon});
-      };
-
-      const re = state.reduce(f, t);
+          return state;
+        }
+      });
 
       return state;
     }
