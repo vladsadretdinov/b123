@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from "@ngrx/store";
-import { AppState } from "../app.state";
-import { City } from "../models/city.model";
+import {Component, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import {AppState} from "../app.state";
 import *  as CityActions from './../actions/city.action';
-import { Observable } from "rxjs/index";
-import { CityWeather } from "../services/cityWeather";
-import {tap} from "rxjs/internal/operators";
+import {CityWeather} from "../services/cityWeather";
+import {State} from "@ngrx/store";
 
 @Component({
   selector: 'app-create',
@@ -15,63 +13,60 @@ import {tap} from "rxjs/internal/operators";
 })
 export class CreateComponent implements OnInit {
 
-  constructor(private store: Store<AppState>,private cityService: CityWeather) {
+  constructor(private store: Store<AppState>, private cityService: CityWeather, private state: State<AppState>) {
   };
 
   addCity(name) {
-    this.cityService.searchWeatherData(name).subscribe(
-      data => {
-              this.store.dispatch(new CityActions.AddCity(
-                {
-                  name:name,
-                  temp: data['current']['temp_c'],
-                  icon: data['current']['condition']['icon']
-                }));
+
+    let state = this.state.getValue().city;
+
+    function isAlreadyExistsInState(state) {
+      return state.name.toUpperCase() === name.toUpperCase();
+    }
+
+    if (state.length > 0) {
+      if (!state.some(isAlreadyExistsInState)) {
+        this.citySearchWeatherData(name);
       }
-    );
-
-    // console.log(AppState.city);
-    // localStorage.setItem('cities', JSON.stringify(action.payload));
-    // this.store.select('city').subscribe(data=> console.log(data));
-    // this.localStorage.addCity(this.store)
-    // console.log(2);
-    // localStorage.setItem('cities', name);
-    // this.store.select('city').pipe(tap(cities => localStorage.setItem('cities', JSON.stringify(cities))));
-    // this.store.select('city').pipe(tap(cities=> console.log(cities)));
-    // this.store.select('city').pipe(tap(cities => console.log('vlad')));
-    // console.log('addtostorage');
-    // console.log(3);
-
-    // localStorage.setItem('cities', name);
-    // localStorage.setItem('cities', JSON.stringify(this.store.select("city")));
+    }
+    else
+      this.citySearchWeatherData(name);
   }
 
-  // update(name) {
-  //   this.store.dispatch(new CityActions.UpdateCity(name));
-  // }
+  citySearchWeatherData(name) {
+    this.cityService.searchWeatherData(name).subscribe(
+      data => {
 
-//   update1(name) {
-//     this.cityService.searchWeatherData(name).subscribe(
-// data => {
-//   localStorage.setItem(name, JSON.stringify({ 'temp': data['current']['temp_c'], icon: data['current']['condition']['icon'] }));
-//   console.log(data['current']['temp_c']);
-//
-//   // this.store.dispatch(new CityActions.RemoveCity(0) );
-//
-//   this.store.dispatch(new CityActions.AddCity(
-//     {
-//       name:name,
-//       temp: data['current']['temp_c'],
-//       icon: data['current']['condition']['icon']
-//     }));
-//
-//      });
-//  }
+        let result = {
+          name: data['location']['name'],
+          temp: data['current']['temp_c'],
+          icon: data['current']['condition']['icon'],
+          text: data['current']['text'],
+          region: data['location']['region'],
+          country: data['location']['country'],
+          lat: data['location']['lat'],
+          lon: data['location']['lon'],
+          tz_id: data['location']['tz_id']
+        };
 
-//   ngOnInit() {
-//   }
-// }
+        function isAlreadyExistsInStateAfterSearchWeatherData(state) {
+          return (
+            state.name === result.name &&
+            state.region === result.region &&
+            state.country === result.country &&
+            state.lat === result.lat &&
+            state.lon === result.lon &&
+            state.tz_id === result.tz_id
+          );
+        }
+
+        if (!(this.state.getValue().city.some(isAlreadyExistsInStateAfterSearchWeatherData))) {
+          this.store.dispatch(new CityActions.AddCity(result));
+        }
+      }
+    );
+  }
+
   ngOnInit() {
-
   }
 }
