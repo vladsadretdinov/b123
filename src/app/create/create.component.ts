@@ -54,9 +54,7 @@ export class CreateComponent implements OnInit {
 
         function isAlreadyExistsInStateAfterSearchWeatherData(state) {
           return (
-            state.name === result.name &&
             state.region === result.region &&
-            state.country === result.country &&
             state.lat === result.lat &&
             state.lon === result.lon &&
             state.tz_id === result.tz_id
