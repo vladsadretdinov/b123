@@ -20,8 +20,11 @@ export class CreateComponent implements OnInit {
 
   addCity(name) {
 
-    if(!name)
+    if(!name) {
+      alert('Ошибка - пустое поле ввода');
       return;
+    }
+
 
     this.name = '';
 
@@ -34,6 +37,9 @@ export class CreateComponent implements OnInit {
     if (state.length > 0) {
       if (!state.some(isAlreadyExistsInState)) {
         this.citySearchWeatherData(name);
+      }
+      else {
+        alert('Ошибка - такой город уже есть в списке');
       }
     }
     else
@@ -68,6 +74,12 @@ export class CreateComponent implements OnInit {
         if (!(this.state.getValue().city.some(isAlreadyExistsInStateAfterSearchWeatherData))) {
           this.store.dispatch(new CityActions.AddCity(result));
         }
+        else {
+          alert('Ошибка - API говорит, что такой город уже есть в списке');
+        }
+      },
+      data => {
+        alert('Ошибка - API не нашел ваш город,попробуйте другой');
       }
     );
   }
