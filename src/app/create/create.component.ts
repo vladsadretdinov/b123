@@ -13,6 +13,8 @@ import {State} from "@ngrx/store";
 })
 export class CreateComponent implements OnInit {
 
+  name: string = null;
+
   constructor(private store: Store<AppState>, private cityService: CityWeather, private state: State<AppState>) {
   };
 
@@ -20,6 +22,8 @@ export class CreateComponent implements OnInit {
 
     if(!name)
       return;
+
+    this.name = '';
 
     let state = this.state.getValue().city;
 
