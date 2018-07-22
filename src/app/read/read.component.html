@@ -4,9 +4,9 @@
       <span class="cities-item-name">{{ city.name }}</span>
       <div class="cities-item-info">
         <span class="cities-item-tmp">{{ city.temp }}°</span>
-        <span class="cities-item-text">{{ city.text }}</span>
+        <img class="cities-item-img" src="{{ city.icon }}">
       </div>
-      <img class="cities-item-img" src="{{ city.icon }}">
+      <span class="cities-item-text">{{ city.text }}</span>
     </li>
   </ul>
 </div>

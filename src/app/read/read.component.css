@@ -18,45 +18,46 @@
 }
 
 .cities-item {
-  height: 250px;
+  height: max-content;
   min-width: 250px;
+  max-width: 400px;
   background: #5182fb;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   margin: 10px;
   position: relative;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cities-item-name {
   display: block;
   padding: 15px;
-  max-width: calc(100% - 15px);
+  max-width: 100%;
   overflow: hidden;
   font-size: 30px;
   font-weight: bold;
   color: white;
   text-align: center;
-  background: #3871fd;
-}
-
-.cities-item-img {
-  position: absolute;
-  top: calc(50% - 38px);
-  left: calc(50% - 38px);
-  border-radius: 50%;
-  border: 6px solid white;
-  background: white;
+  background: #4e5c86;
+  width: 100%
 }
 
 .cities-item-info {
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  padding: 15px;
-  width: calc(100% - 30px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  width: 100%;
+  padding: 15px;
+}
+
+.cities-item-img {
+  border-radius: 50%;
+  border: 6px solid white;
+  background: white;
+  width: 64px;
+  height: 64px;
 }
 
 .cities-item-tmp {
@@ -69,5 +70,8 @@
   color: white;
   font-weight: bold;
   font-size: 25px;
-  text-align: right;
+  text-align: left;
+  width: 100%;
+  padding: 15px;
+  background: #2e4271;
 }
